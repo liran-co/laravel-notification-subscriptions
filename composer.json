@@ -1,0 +1,37 @@
+{
+    "name": "liran-co/laravel-notification-subscriptions",
+    "description": "Notification subscription management.",
+    "homepage": "https://github.com/liran-co/laravel-notification-subscriptions",
+    "keywords": [
+        "laravel",
+        "subscription",
+        "subscriptions",
+        "notification",
+        "notifications"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Liran Cohen",
+            "email": "l@liran.co"
+        }
+    ],
+    "require": {
+        "php": "^7.2.5",
+        "laravel/framework": "^6.0|^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LiranCo\\NotificationSubscriptions\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LiranCo\\NotificationSubscriptions\\NotificationSubscriptionsServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
