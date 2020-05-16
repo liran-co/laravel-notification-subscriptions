@@ -1,6 +1,6 @@
 # Laravel Notification Subscriptions
 
-Laravel Notification Subscriptions is a package that extends the [Laravel Notification system](https://laravel.com/docs/master/notifications) to manage user subscriptions to notifications. It supports subscriptions to specific channels and scoping subscriptions by models.
+Laravel Notification Subscriptions is a package that hooks directly into Laravel's existing [notification system](https://laravel.com/docs/master/notifications) and adds functionality to manage user subscriptions to your app's notifications and suppress them automatically when they shouldn't be sent. You can subscribe and unsubscribe users to specific notification channels, create opt-in notifications, and scope your subscriptions by another model.
 
 [![Latest Stable Version](https://poser.pugx.org/liran-co/laravel-notification-subscriptions/v/stable)](https://packagist.org/packages/liran-co/laravel-notification-subscriptions) [![Total Downloads](https://poser.pugx.org/liran-co/laravel-notification-subscriptions/downloads)](https://packagist.org/packages/liran-co/laravel-notification-subscriptions) [![License](https://poser.pugx.org/liran-co/laravel-notification-subscriptions/license)](https://packagist.org/packages/liran-co/laravel-notification-subscriptions)
 
@@ -135,9 +135,15 @@ use App\Notifications\InvoicePaid;
 $user->resetSubscriptions(InvoicePaid::class)->subscribe(InvoicePaid::class);
 ```
 
-## Advanced usage
+### Retrieving subscriptions
 
-### Scoping by models
+You can get a user's subscriptions by using the `notificationSubscriptions()` relation:
+
+```php
+$user->notificationSubscriptions();
+```
+
+## Model scoping
 
 In some applications, you need to unsubscribe users from notifications related to a certain model. For example, if a user is a part of multiple organizations, they may only want to unsubscribe from a single organization. You can accomplish this by applying a model scope to your notifications:
 
@@ -190,6 +196,8 @@ class InvoicePaid extends Notification
 
 Now, when this notification gets sent, it will check for the model scope and apply it if necessary. You can add your own logic to `getSubscriptionModel` and even return `null` in cases you don't want to scope the subscription.
 
+### Resetting scoped subscriptions
+
 To reset the notifications on a scoped subscription:
 
 ```php
@@ -202,6 +210,22 @@ $organization = Organization::find(1);
 
 $user->resetSubscriptions(InvoicePaid::class, $organization);
 ```
+
+### Retrieving scoped subscriptions
+
+Retrieve subscriptions related to a certain model:
+
+```php
+use App\Models\Organization;
+
+//...
+
+$organization = Organization::find(1);
+
+$user->notificationSubscriptions()->model($organization);
+```
+
+## Advanced usage
 
 ### Ignoring subscriptions
 
