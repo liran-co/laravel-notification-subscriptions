@@ -2,12 +2,17 @@
 
 namespace LiranCo\NotificationSubscriptions\Listeners;
 
+use LiranCo\NotificationSubscriptions\Traits\HasNotificationSubscriptions;
 use Illuminate\Notifications\Events\NotificationSending;
 
 class NotificationSendingListener
 {
     public function handle(NotificationSending $event)
     {
+        if (! in_array(HasNotificationSubscriptions::class, class_uses_recursive($event->notifiable))) {
+            return $event;
+        }
+        
         if (in_array($event->channel, config('notification-subscriptions.excluded_channels'))) {
             return $event;
         }
