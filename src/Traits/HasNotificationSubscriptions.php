@@ -20,7 +20,7 @@ trait HasNotificationSubscriptions
 			return $subscription->resubscribe();
 		}
 		
-		return $this->createNewSubscription($type, $channel, $model);
+		return $this->createSubscription($type, $channel, $model);
 	}
 	
 	public function unsubscribe($type, $channel = '*', $model = null)
@@ -31,7 +31,7 @@ trait HasNotificationSubscriptions
 			return $subscription->unsubscribe();
 		}
 		
-		return $this->createNewSubscription($type, $channel, $model, true);
+		return $this->createSubscription($type, $channel, $model, true);
 	}
 	
 	public function findSubscription($type, $channel = '*', $model = null)
@@ -39,7 +39,7 @@ trait HasNotificationSubscriptions
 		return $this->notificationSubscriptions()->where('type', $type)->where('channel', $channel)->model($model)->first();
 	}
 	
-	public function createNewSubscription($type, $channel = '*', $model = null, $unsubscribe = false) 
+	public function createSubscription($type, $channel = '*', $model = null, $unsubscribe = false) 
 	{
 		return $this->notificationSubscriptions()->create([
 			'type' => $type,
