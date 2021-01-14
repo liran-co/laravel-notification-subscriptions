@@ -16,8 +16,4 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
     }
-    
-    public function register()
-    {
-    }
 }
