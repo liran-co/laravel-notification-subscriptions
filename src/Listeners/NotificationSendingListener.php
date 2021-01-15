@@ -33,7 +33,9 @@ class NotificationSendingListener
         
         $subscribed = $event->notifiable->isSubscribed(get_class($event->notification), $event->channel, $model, $optin);
          
-        if (! $subscribed) return false;
+        if (! $subscribed) {
+            return false;
+        }
         
         return $event;
     }
