@@ -2,6 +2,7 @@
 
 namespace LiranCo\NotificationSubscriptions\Listeners;
 
+use LiranCo\NotificationSubscriptions\Events\NotificationSuppressedEvent;
 use LiranCo\NotificationSubscriptions\Traits\HasNotificationSubscriptions;
 use Illuminate\Notifications\Events\NotificationSending;
 
@@ -33,7 +34,10 @@ class NotificationSendingListener
         
         $subscribed = $event->notifiable->isSubscribed(get_class($event->notification), $event->channel, $model, $optin);
          
-        if (! $subscribed) return false;
+        if (! $subscribed) {
+            NotificationSuppressedEvent::dispatch($event, $event->notification, $event->channel, $model);
+            return false;
+        }
         
         return $event;
     }
