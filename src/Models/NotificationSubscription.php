@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace LiranCo\NotificationSubscriptions\Models;
 
@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class NotificationSubscription extends Model
 {
-
     public $incrementing = true;
 
     protected $table = 'notification_subscriptions';
@@ -41,5 +40,4 @@ class NotificationSubscription extends Model
     {
         $this->forceFill(['unsubscribed_at' => null])->save();
     }
-    
 }

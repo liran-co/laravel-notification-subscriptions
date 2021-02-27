@@ -6,10 +6,10 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class EventServiceProvider extends ServiceProvider
 {
-	protected $listen = [
-	    'Illuminate\Notifications\Events\NotificationSending' => [
-	        'LiranCo\NotificationSubscriptions\Listeners\NotificationSendingListener',
-	    ],
+    protected $listen = [
+        'Illuminate\Notifications\Events\NotificationSending' => [
+            'LiranCo\NotificationSubscriptions\Listeners\NotificationSendingListener',
+        ],
     ];
 
     public function boot()

@@ -18,9 +18,10 @@ class NotificationSubscriptionsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/notification-subscriptions.php', 'notification-subscriptions'
+            __DIR__.'/../config/notification-subscriptions.php',
+            'notification-subscriptions'
         );
         
-    	$this->app->register(\LiranCo\NotificationSubscriptions\Providers\EventServiceProvider::class);
+        $this->app->register(\LiranCo\NotificationSubscriptions\Providers\EventServiceProvider::class);
     }
 }

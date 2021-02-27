@@ -1,7 +1,7 @@
 <?php
 
 return [
-	
-	'excluded_channels' => ['database'],
+    
+    'excluded_channels' => ['database'],
 
 ];
