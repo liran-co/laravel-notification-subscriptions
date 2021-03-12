@@ -74,7 +74,7 @@ $user->notify(new InvoicePaid($invoice)); //This won't get sent.
 
 By default, all notifications will be sent if no subscribe/unsubscribe record is found. This means you don't need to explicitly **subscribe** a user to a notification, you only need to **unsubscribe** them.
 
-In some cases, however, you'd like to create opt-in notifications. To do so, modify your notification class and add a function called `getOptInChannels`:
+In some cases, however, you'd like to create opt-in notifications. To do so, modify your notification class and add a function called `getOptInSubscriptions`:
 
 ```php
 <?php
@@ -90,7 +90,7 @@ class InvoicePaid extends Notification
         return ['mail', 'sms'];
     }
 
-    public function getOptInChannels()
+    public function getOptInSubscriptions()
     {
         return ['sms'];
     }
