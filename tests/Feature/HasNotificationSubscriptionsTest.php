@@ -25,11 +25,33 @@ class HasNotificationSubscriptionsTest extends TestCase
         $user->subscribe($type);
 
         //Assert
-        $this->assertEquals(1, NotificationSubscription::count());
+        $user->refresh();
+        $this->assertEquals(1, $user->notificationSubscriptions->count());
+
+        $this->assertEquals($type, $user->notificationSubscriptions->first()->type);
+        $this->assertEquals('*', $user->notificationSubscriptions->first()->channel);
     }
 
     /** @test */
-    public function can_unsubscribe_to_notification()
+    public function can_subscribe_to_notification_specific_channel()
+    {
+        //Arrange
+        /** @var User $user */
+        $user = User::factory()->create();
+
+        //Act
+        $user->subscribe('notification', 'sms');
+
+        //Assert
+        $user->refresh();
+        $this->assertEquals(1, $user->notificationSubscriptions->count());
+
+        $this->assertEquals('notification', $user->notificationSubscriptions->first()->type);
+        $this->assertEquals('sms', $user->notificationSubscriptions->first()->channel);
+    }
+
+    /** @test */
+    public function can_unsubscribe_from_notification()
     {
         //Arrange
         /** @var User $user */
@@ -45,5 +67,29 @@ class HasNotificationSubscriptionsTest extends TestCase
 
         //Assert
         $this->assertNotNull(NotificationSubscription::first()->unsubscribed_at);
+    }
+
+    /** @test */
+    public function can_unsubscribe_from_notification_specific_channel()
+    {
+        //Arrange
+        /** @var User $user */
+        $user = User::factory()->create();
+
+        $smsNotification = $user->subscribe('notification', 'sms');
+        $emailNotification = $user->subscribe('notification', 'email');
+
+        $this->assertNull($smsNotification->unsubscribed_at);
+        $this->assertNull($emailNotification->unsubscribed_at);
+
+        //Act
+        $user->unsubscribe('notification', 'sms');
+
+        //Assert
+        $smsNotification->refresh();
+        $emailNotification->refresh();
+
+        $this->assertNotNull($smsNotification->unsubscribed_at);
+        $this->assertNull($emailNotification->unsubscribed_at);
     }
 }
