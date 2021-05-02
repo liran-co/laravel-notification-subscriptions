@@ -2,8 +2,8 @@
 
 namespace LiranCo\NotificationSubscriptions\Listeners;
 
-use LiranCo\NotificationSubscriptions\Events\NotificationSuppressed;
 use Illuminate\Notifications\Events\NotificationSending;
+use LiranCo\NotificationSubscriptions\Events\NotificationSuppressed;
 use LiranCo\NotificationSubscriptions\Traits\HasNotificationSubscriptions;
 
 class NotificationSendingListener
