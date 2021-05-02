@@ -3,8 +3,8 @@
 namespace LiranCo\NotificationSubscriptions\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Notifications\Events\NotificationSending;
+use Illuminate\Queue\SerializesModels;
 
 class NotificationSuppressedEvent
 {
