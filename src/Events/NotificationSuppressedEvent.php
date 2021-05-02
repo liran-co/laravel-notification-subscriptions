@@ -8,7 +8,8 @@ use Illuminate\Notifications\Events\NotificationSending;
 
 class NotificationSuppressedEvent
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     private $event;
 
