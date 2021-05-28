@@ -11,6 +11,11 @@ trait HasNotificationSubscriptions
         return $this->morphMany(NotificationSubscription::class, 'notifiable');
     }
 
+    public function model()
+    {
+        return $this->morphMany(NotificationSubscription::class, 'model');
+    }
+
     public function subscribe($type, $channel = '*', $model = null)
     {
         $subscription = $this->findSubscription($type, $channel, $model);
