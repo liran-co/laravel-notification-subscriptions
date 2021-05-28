@@ -21,6 +21,11 @@ class NotificationSubscription extends Model
         return $this->morphTo();
     }
 
+    public function model()
+    {
+        return $this->morphTo();
+    }
+
     public function scopeModel($query, $model = null)
     {
         return $query->where('model_type', $model ? get_class($model) : null)->where('model_id', optional($model)->id);
