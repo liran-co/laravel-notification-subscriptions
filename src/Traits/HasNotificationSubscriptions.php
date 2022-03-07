@@ -2,8 +2,14 @@
 
 namespace LiranCo\NotificationSubscriptions\Traits;
 
+use Illuminate\Database\Eloquent\Collection;
 use LiranCo\NotificationSubscriptions\Models\NotificationSubscription;
 
+/**
+ * Trait HasNotificationSubscriptions
+ * @package LiranCo\NotificationSubscriptions\Traits
+ * @property Collection|NotificationSubscription[] notificationSubscriptions
+ */
 trait HasNotificationSubscriptions
 {
     public function notificationSubscriptions()
