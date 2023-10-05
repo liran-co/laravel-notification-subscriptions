@@ -66,4 +66,32 @@ trait HasNotificationSubscriptions
 
         return $this;
     }
+
+    public function subscribe_if($boolean, $type, $channel = '*', $model = null)
+    {
+        if ($boolean) {
+            return $this->subscribe($type, $channel, $model);
+        }
+    }
+
+    public function subscribe_unless($boolean, $type, $channel = '*', $model = null)
+    {
+        if (! $boolean) {
+            return $this->subscribe($type, $channel, $model);
+        }
+    }
+
+    public function unsubscribe_if($boolean, $type, $channel = '*', $model = null)
+    {
+        if ($boolean) {
+            return $this->unsubscribe($type, $channel, $model);
+        }
+    }
+
+    public function unsubscribe_unless($boolean, $type, $channel = '*', $model = null)
+    {
+        if (! $boolean) {
+            return $this->unsubscribe($type, $channel, $model);
+        }
+    }
 }
