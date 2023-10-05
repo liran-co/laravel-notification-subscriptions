@@ -267,6 +267,22 @@ return [
 ];
 ```
 
+### Conditional subscriptions
+
+Unsubscribe the user if the given condition is true:
+```php
+use App\Notifications\InvoicePaid;
+
+$user->unsubscribe_if($checkbox == 'checked', InvoicePaid::class);
+```
+
+Unsubscribe the user unless the given condition is true:
+```php
+use App\Notifications\InvoicePaid;
+
+$user->unsubscribe_unless($checkbox == 'checked', InvoicePaid::class);
+```
+
 ## Resolution logic
 
 The package uses the following logic to resolve whether or not to send a notification:
